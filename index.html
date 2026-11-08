@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131a">
+<meta name="description" content="EVOLUTION 2.0 — тренировки и подготовка к ЕГЭ">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<title>EVOLUTION 2.0</title>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div><div class="eyebrow">ТВОЯ СИСТЕМА ПРОГРЕССА</div><h1>EVOLUTION<span> 2.0</span></h1></div>
+    <div class="avatar">E</div>
+  </header>
+
+  <nav class="tabs" aria-label="Разделы">
+    <button class="tab active" data-page="home">Обзор</button>
+    <button class="tab" data-page="training">Тренировки</button>
+    <button class="tab" data-page="exam">ЕГЭ</button>
+    <button class="tab" data-page="stats">Прогресс</button>
+  </nav>
+
+  <main>
+    <section id="page-home" class="page active">
+      <div class="hero panel">
+        <div class="eyebrow">НЕБОЛЬШИЕ ШАГИ — БОЛЬШОЙ РЕЗУЛЬТАТ</div>
+        <h2>Становись сильнее.<br><span>Учись эффективнее.</span></h2>
+        <p>Тренировки и подготовка к экзаменам — в одном месте.</p>
+      </div>
+      <div class="section-heading"><h2>Твой день</h2><span id="todayLabel" class="muted"></span></div>
+      <div class="grid-two">
+        <article class="metric panel"><div class="metric-icon">↗</div><div class="muted">Тренировок</div><strong id="homeWorkouts">0</strong><small>сохранено в журнале</small></article>
+        <article class="metric panel"><div class="metric-icon">◎</div><div class="muted">Учебных занятий</div><strong id="homeStudy">0</strong><small>отмечено в ЕГЭ</small></article>
+      </div>
+      <div class="section-heading"><h2>Быстрый доступ</h2></div>
+      <div class="quick-actions">
+        <button class="quick panel" data-go="training"><span>＋</span><b>Записать тренировку</b><small>Дата, упражнения, подходы</small></button>
+        <button class="quick panel" data-go="exam"><span>✎</span><b>Добавить занятие ЕГЭ</b><small>Предмет, тема, результат</small></button>
+      </div>
+      <div class="section-heading"><h2>Последняя рекомендация</h2></div>
+      <div class="panel recommendation" id="homeRecommendation"><div class="ai-label">АВТОАНАЛИЗ</div><p>Добавь первую тренировку — здесь появятся рекомендации по нагрузке.</p></div>
+    </section>
+
+    <section id="page-training" class="page">
+      <div class="section-heading"><div><div class="eyebrow">ЖУРНАЛ НАГРУЗОК</div><h2>Тренировки</h2></div><button class="primary" id="newWorkout">＋ День</button></div>
+      <div class="panel calendar-panel">
+        <div class="calendar-head"><button class="icon-btn" id="prevMonth">‹</button><b id="monthTitle"></b><button class="icon-btn" id="nextMonth">›</button></div>
+        <div class="calendar-grid" id="calendar"></div>
+        <div class="calendar-legend"><span><i></i> Есть тренировка</span><span><i class="today-dot"></i> Сегодня</span></div>
+      </div>
+      <div class="section-heading"><h2 id="selectedDateTitle">Тренировки за дату</h2><span class="muted" id="workoutCount">0 записей</span></div>
+      <div id="workoutList" class="stack"></div>
+      <div class="panel editor" id="workoutEditor">
+        <div class="editor-top"><div><div class="eyebrow">ЗАПИСЬ ТРЕНИРОВКИ</div><h3 id="editorTitle">Новая тренировка</h3></div><button class="icon-btn" id="closeEditor">✕</button></div>
+        <label>Дата тренировки<input type="date" id="workoutDate"></label>
+        <label>Название дня<input id="workoutName" placeholder="Например: Грудь + трицепс"></label>
+        <div class="divider"></div>
+        <div class="section-heading compact"><h3>Упражнения</h3><button class="secondary" id="addExercise">＋ Упражнение</button></div>
+        <div id="exerciseEditor" class="stack"></div>
+        <label>Заметки<textarea id="workoutNotes" rows="2" placeholder="Самочувствие, техника, сон..."></textarea></label>
+        <div class="editor-actions"><button class="secondary danger" id="deleteWorkout">Удалить</button><button class="primary" id="saveWorkout">Сохранить тренировку</button></div>
+      </div>
+    </section>
+
+    <section id="page-exam" class="page">
+      <div class="section-heading"><div><div class="eyebrow">ЦЕЛЬ: 80–90 БАЛЛОВ</div><h2>Подготовка к ЕГЭ</h2></div><button class="primary" id="addStudy">＋ Занятие</button></div>
+      <div class="grid-three">
+        <div class="subject panel"><span>∑</span><b>Профильная<br>математика</b><small id="mathCount">0 занятий</small></div>
+        <div class="subject panel"><span>А</span><b>Русский<br>язык</b><small id="rusCount">0 занятий</small></div>
+        <div class="subject panel"><span>{ }</span><b>Информатика</b><small id="infoCount">0 занятий</small></div>
+      </div>
+      <div class="panel form-panel" id="studyForm">
+        <div class="editor-top"><h3>Новое занятие</h3><button class="icon-btn" id="closeStudy">✕</button></div>
+        <label>Дата<input type="date" id="studyDate"></label>
+        <label>Предмет<select id="studySubject"><option value="Математика">Профильная математика</option><option value="Русский">Русский язык</option><option value="Информатика">Информатика</option></select></label>
+        <label>Тема<input id="studyTopic" placeholder="Например: производная"></label>
+        <div class="grid-two">
+          <label>Решено заданий<input type="number" min="0" id="studyDone" placeholder="0"></label>
+          <label>Правильно<input type="number" min="0" id="studyCorrect" placeholder="0"></label>
+        </div>
+        <button class="primary full" id="saveStudy">Сохранить занятие</button>
+      </div>
+      <div class="section-heading"><h2>История занятий</h2></div>
+      <div id="studyList" class="stack"></div>
+      <p class="note">В этой версии задания — твой журнал занятий. Для официальных вариантов и демоверсий используй материалы ФИПИ: <a href="https://fipi.ru/ege/demoversii-specifikacii-kodifikatory" target="_blank" rel="noopener">открыть ФИПИ ↗</a>.</p>
+    </section>
+
+    <section id="page-stats" class="page">
+      <div class="eyebrow">ДИНАМИКА</div><h2>Твой прогресс</h2>
+      <div class="grid-two">
+        <article class="metric panel"><div class="muted">Тренировок</div><strong id="statsWorkouts">0</strong><small>всего записано</small></article>
+        <article class="metric panel"><div class="muted">Упражнений</div><strong id="statsExercises">0</strong><small>в истории</small></article>
+      </div>
+      <div class="panel"><h3>Последние силовые результаты</h3><div id="exerciseStats" class="stack small-stack"><p class="muted">Пока нет записей.</p></div></div>
+      <div class="panel"><h3>Учёба</h3><div id="examStats" class="stack small-stack"></div></div>
+      <div class="panel"><h3>Данные</h3><p class="muted">Записи хранятся локально в браузере на этом устройстве.</p><div class="button-row"><button class="secondary" id="exportData">Экспорт JSON</button><button class="secondary danger" id="clearData">Очистить всё</button></div></div>
+    </section>
+  </main>
+  <footer>EVOLUTION 2.0 <span>ТВОЙ ПРОГРЕСС — ТВОИ ПРАВИЛА</span></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
